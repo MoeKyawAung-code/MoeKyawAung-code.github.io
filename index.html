@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Moe Kyaw Aung — Senior Android Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+:root{--cy:#00FFFF;--go:#FFD700;--dk:#000510;--card:rgba(0,20,50,0.75);--glow:0 0 20px #00FFFF55,0 0 60px #00FFFF22;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dk);color:#c0e8ff;font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none;}
+#cd{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--cy);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--cy),0 0 24px var(--cy);}
+#cr{position:fixed;top:0;left:0;width:36px;height:36px;border:1.5px solid var(--cy);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;opacity:.6;}
+#cvs{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+.scan{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,255,.012) 2px,rgba(0,255,255,.012) 4px);}
+.wrap{position:relative;z-index:2;}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(0,5,16,.95),transparent);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,255,255,.1);}
+.logo{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;color:var(--cy);letter-spacing:.15em;text-shadow:var(--glow);}
+.nav-l{display:flex;gap:2rem;list-style:none;}
+.nav-l a{color:rgba(0,255,255,.7);text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:.8rem;letter-spacing:.1em;transition:color .3s,text-shadow .3s;text-transform:uppercase;}
+.nav-l a:hover{color:var(--cy);text-shadow:var(--glow);}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;}
+.h-tag{font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.3em;color:rgba(0,255,255,.5);text-transform:uppercase;margin-bottom:1.2rem;opacity:0;animation:fup .8s .3s forwards;}
+.h-name{font-family:'Orbitron',monospace;font-size:clamp(2.6rem,7vw,5.5rem);font-weight:900;line-height:1.05;letter-spacing:.04em;background:linear-gradient(135deg,#fff 20%,var(--cy) 60%,var(--go) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px rgba(0,255,255,.4));opacity:0;animation:fup 1s .5s forwards;}
+.h-title{font-family:'Rajdhani',sans-serif;font-size:clamp(1rem,2.5vw,1.5rem);font-weight:600;color:var(--go);letter-spacing:.25em;text-transform:uppercase;margin-top:1rem;opacity:0;animation:fup 1s .75s forwards;}
+.h-sub{font-size:1rem;color:rgba(160,220,255,.65);margin-top:.6rem;letter-spacing:.08em;opacity:0;animation:fup 1s .95s forwards;}
+.h-cta{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fup 1s 1.2s forwards;}
+.btn{padding:.75rem 2rem;font-family:'Orbitron',monospace;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .3s;}
+.bp{background:var(--cy);color:#000;border:none;box-shadow:0 0 20px rgba(0,255,255,.4);}
+.bp:hover{box-shadow:0 0 40px rgba(0,255,255,.8);transform:translateY(-2px);}
+.bo{background:transparent;color:var(--cy);border:1px solid rgba(0,255,255,.5);}
+.bo:hover{background:rgba(0,255,255,.08);border-color:var(--cy);box-shadow:var(--glow);transform:translateY(-2px);}
+.s-hint{position:absolute;bottom:2rem;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:rgba(0,255,255,.4);text-transform:uppercase;animation:pulse 2s infinite;}
+section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative;z-index:2;}
+.slabel{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.35em;color:rgba(0,255,255,.45);text-transform:uppercase;margin-bottom:.5rem;}
+.stitle{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;color:#fff;letter-spacing:.05em;margin-bottom:3rem;}
+.stitle::after{content:'';display:block;width:60px;height:2px;background:linear-gradient(to right,var(--cy),transparent);margin-top:.75rem;}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}
+@media(max-width:768px){.ag{grid-template-columns:1fr;}.nav-l{gap:1rem;}}
+.cblock{background:rgba(0,10,25,.9);border:1px solid rgba(0,255,255,.15);border-left:3px solid var(--cy);border-radius:4px;padding:1.5rem;font-family:'Share Tech Mono',monospace;font-size:.8rem;line-height:1.8;color:#7ecfff;overflow:auto;}
+.kw{color:#b07aff;}.str{color:#7fff9b;}.num{color:var(--go);}.cm{color:#4a7080;font-style:italic;}.fn{color:var(--cy);}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.si{background:var(--card);border:1px solid rgba(0,255,255,.1);border-radius:4px;padding:1.2rem;transition:border-color .3s,box-shadow .3s;}
+.si:hover{border-color:var(--cy);box-shadow:var(--glow);}
+.sn{font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;color:var(--cy);display:block;}
+.sl{font-size:.75rem;letter-spacing:.1em;color:rgba(160,220,255,.6);text-transform:uppercase;}
+.scat{margin-bottom:2.5rem;}
+.ct{font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.25em;color:var(--go);text-transform:uppercase;margin-bottom:1rem;}
+.tags{display:flex;flex-wrap:wrap;gap:.6rem;}
+.tag{background:rgba(0,255,255,.05);border:1px solid rgba(0,255,255,.2);color:rgba(0,255,255,.85);padding:.35rem .9rem;border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.05em;transition:all .25s;cursor:default;}
+.tag:hover{background:rgba(0,255,255,.12);border-color:var(--cy);box-shadow:0 0 12px rgba(0,255,255,.25);color:#fff;}
+.tag.g{border-color:rgba(255,215,0,.3);color:rgba(255,215,0,.9);background:rgba(255,215,0,.05);}
+.tag.g:hover{border-color:var(--go);box-shadow:0 0 12px rgba(255,215,0,.3);background:rgba(255,215,0,.1);}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;}
+.pc{background:var(--card);border:1px solid rgba(0,255,255,.1);border-radius:4px;padding:1.8rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s;}
+.pc::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--cy),var(--go),transparent);opacity:0;transition:opacity .3s;}
+.pc:hover{border-color:rgba(0,255,255,.4);transform:translateY(-4px);box-shadow:var(--glow);}
+.pc:hover::before{opacity:1;}
+.pi{font-size:2rem;margin-bottom:.8rem;}
+.pn{font-family:'Orbitron',monospace;font-size:.95rem;font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:.5rem;}
+.pd{font-size:.85rem;line-height:1.6;color:rgba(160,220,255,.65);margin-bottom:1rem;}
+.pt{display:flex;flex-wrap:wrap;gap:.4rem;}
+.ptg{background:rgba(0,255,255,.07);border:1px solid rgba(0,255,255,.15);color:rgba(0,255,255,.7);padding:.2rem .6rem;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.05em;border-radius:2px;}
+.eg{display:flex;flex-direction:column;gap:1.5rem;}
+.ec{background:var(--card);border:1px solid rgba(0,255,255,.1);border-radius:4px;padding:1.5rem 2rem;display:flex;gap:1.5rem;align-items:center;transition:border-color .3s,box-shadow .3s;}
+.ec:hover{border-color:var(--cy);box-shadow:var(--glow);}
+.ei{font-size:2.2rem;flex-shrink:0;}
+.ed{font-family:'Orbitron',monospace;font-size:.85rem;font-weight:700;color:var(--cy);letter-spacing:.05em;margin-bottom:.3rem;}
+.es{font-size:.9rem;color:rgba(160,220,255,.8);}
+.ey{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--go);margin-top:.3rem;}
+#contact{text-align:center;}
+.cq{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(160,220,255,.75);max-width:600px;margin:0 auto 2.5rem;line-height:1.8;font-style:italic;}
+.cq strong{color:var(--cy);font-style:normal;}
+.cls{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;}
+.cl{background:var(--card);border:1px solid rgba(0,255,255,.15);color:var(--cy);padding:.9rem 2rem;text-decoration:none;font-family:'Orbitron',monospace;font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border-radius:2px;transition:all .3s;display:flex;align-items:center;gap:.6rem;}
+.cl:hover{background:rgba(0,255,255,.1);box-shadow:var(--glow);transform:translateY(-2px);}
+footer{text-align:center;padding:2.5rem;border-top:1px solid rgba(0,255,255,.08);font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.15em;color:rgba(0,255,255,.3);position:relative;z-index:2;}
+.hr{width:100%;height:1px;background:linear-gradient(to right,transparent,rgba(0,255,255,.25),rgba(255,215,0,.2),transparent);position:relative;z-index:2;}
+@keyframes fup{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+.rev{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.rev.on{opacity:1;transform:translateY(0);}
+.glitch{animation:gl 4s infinite;}
+@keyframes gl{0%,90%,100%{clip-path:none;transform:none;}92%{clip-path:polygon(0 20%,100% 20%,100% 30%,0 30%);transform:translate(-2px,0);}94%{clip-path:polygon(0 55%,100% 55%,100% 65%,0 65%);transform:translate(2px,0);}96%{clip-path:none;transform:none;}}
+</style>
+</head>
+<body>
+<canvas id="cvs"></canvas>
+<div class="scan"></div>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<nav>
+  <div class="logo">MKA.DEV</div>
+  <ul class="nav-l">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+  <div id="hero">
+    <p class="h-tag">// Senior Android Developer · AI Engineer · Myanmar 🇲🇲</p>
+    <h1 class="h-name glitch">MOE KYAW AUNG</h1>
+    <p class="h-title">5+ Years · Kotlin · Jetpack Compose · Gemini AI</p>
+    <p class="h-sub">Tachileik, Myanmar 🇲🇲 &nbsp;|&nbsp; Bilingual Tech Creator</p>
+    <div class="h-cta">
+      <a href="#projects" class="btn bp">View Projects</a>
+      <a href="#contact" class="btn bo">Get In Touch</a>
+    </div>
+    <p class="s-hint">↓ Scroll to explore</p>
+  </div>
+
+  <div class="hr"></div>
+
+  <section id="about">
+    <p class="slabel">// 01 · Profile</p>
+    <h2 class="stitle rev">About Me — မိတ်ဆက်</h2>
+    <div class="ag">
+      <div class="cblock rev">
+<span class="kw">data class</span> <span class="fn">Developer</span>(<br/>
+&nbsp;&nbsp;<span class="kw">val</span> name&nbsp;&nbsp;&nbsp;&nbsp; = <span class="str">"Moe Kyaw Aung"</span>,<br/>
+&nbsp;&nbsp;<span class="kw">val</span> role&nbsp;&nbsp;&nbsp;&nbsp; = <span class="str">"Senior Android Dev"</span>,<br/>
+&nbsp;&nbsp;<span class="kw">val</span> xp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = <span class="num">5</span>, <span class="cm">// years+</span><br/>
+&nbsp;&nbsp;<span class="kw">val</span> location = <span class="str">"🇲🇲 Tachileik, Myanmar"</span>,<br/>
+&nbsp;&nbsp;<span class="kw">val</span> stack&nbsp;&nbsp;&nbsp; = listOf(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Kotlin"</span>, <span class="str">"Java"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Jetpack Compose"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"MVVM"</span>, <span class="str">"Clean Arch"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Firebase"</span>, <span class="str">"Three.js"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Gemini API"</span><br/>
+&nbsp;&nbsp;),<br/>
+&nbsp;&nbsp;<span class="kw">val</span> mission&nbsp; = <span class="str">"Educate Myanmar Devs 🇲🇲"</span><br/>
+)<br/><br/>
+<span class="cm">// Currently: 4D-animated GitHub Pages 🚀</span>
+      </div>
+      <div class="sg rev">
+        <div class="si"><span class="sn">5+</span><span class="sl">Years Experience</span></div>
+        <div class="si"><span class="sn">8+</span><span class="sl">GitHub Accounts</span></div>
+        <div class="si"><span class="sn">30+</span><span class="sl">Projects Built</span></div>
+        <div class="si"><span class="sn">19</span><span class="sl">Languages (AI App)</span></div>
+        <div class="si"><span class="sn">2</span><span class="sl">Degrees Earned</span></div>
+        <div class="si"><span class="sn">∞</span><span class="sl">Lines of Code</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <section id="skills">
+    <p class="slabel">// 02 · Expertise</p>
+    <h2 class="stitle rev">Tech Stack — ကျွမ်းကျင်မှုများ</h2>
+    <div class="scat rev">
+      <p class="ct">📱 Android & Mobile</p>
+      <div class="tags">
+        <span class="tag">Kotlin</span><span class="tag">Java</span><span class="tag">Jetpack Compose</span><span class="tag">Android SDK</span><span class="tag">MVVM</span><span class="tag">Clean Architecture</span><span class="tag">Retrofit</span><span class="tag">Room DB</span><span class="tag">Hilt / Dagger</span><span class="tag">Firebase</span><span class="tag">Coroutines</span><span class="tag">Flow</span>
+      </div>
+    </div>
+    <div class="scat rev">
+      <p class="ct">🌐 Web & 3D</p>
+      <div class="tags">
+        <span class="tag g">Three.js</span><span class="tag g">JavaScript</span><span class="tag g">HTML5</span><span class="tag g">CSS3</span><span class="tag g">React</span><span class="tag g">WebGL</span><span class="tag g">Canvas API</span>
+      </div>
+    </div>
+    <div class="scat rev">
+      <p class="ct">🤖 AI & APIs</p>
+      <div class="tags">
+        <span class="tag">Gemini API</span><span class="tag">Gemini 2.0 Flash</span><span class="tag">REST API</span><span class="tag">AI Integration</span><span class="tag">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="scat rev">
+      <p class="ct">🛠️ Tools</p>
+      <div class="tags">
+        <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">GitHub Actions</span><span class="tag">GitHub Pages</span><span class="tag">Android Studio</span><span class="tag">VS Code</span><span class="tag">Termux</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <section id="projects">
+    <p class="slabel">// 03 · Portfolio</p>
+    <h2 class="stitle rev">Featured Projects — ပရောဂျက်များ</h2>
+    <div class="pg">
+      <div class="pc rev"><div class="pi">🌐</div><div class="pn">AI Multilingual Translator</div><div class="pd">Gemini API powered translator — 19 languages including Myanmar, Chinese, Thai. Mic support, self-contained single HTML file.</div><div class="pt"><span class="ptg">Gemini API</span><span class="ptg">Vanilla JS</span><span class="ptg">19 Languages</span></div></div>
+      <div class="pc rev"><div class="pi">🎲</div><div class="pn">3D Rubik's Cube Game</div><div class="pd">Feature-complete Three.js Rubik's Cube with swipe controls, multiple sizes (2×2–5×5), color schemes, and animations.</div><div class="pt"><span class="ptg">Three.js</span><span class="ptg">WebGL</span><span class="ptg">Swipe Controls</span></div></div>
+      <div class="pc rev"><div class="pi">🔄</div><div class="pn">CodeVerter</div><div class="pd">Programming language converter powered by Gemini 2.0 Flash. Convert between 30+ languages instantly in the browser.</div><div class="pt"><span class="ptg">Gemini 2.0 Flash</span><span class="ptg">HTML/JS</span><span class="ptg">GitHub Pages</span></div></div>
+      <div class="pc rev"><div class="pi">📊</div><div class="pn">Life in Weeks</div><div class="pd">Bilingual life visualization app in React with dark theme and English/Myanmar toggle — see your whole life in weeks.</div><div class="pt"><span class="ptg">React</span><span class="ptg">Bilingual</span><span class="ptg">Dark Theme</span></div></div>
+      <div class="pc rev"><div class="pi">🏙️</div><div class="pn">Myanmar Cities Directory</div><div class="pd">Comprehensive Myanmar cities and postcodes directory — celebrating Myanmar culture and helping locals find postal codes.</div><div class="pt"><span class="ptg">HTML/CSS/JS</span><span class="ptg">Myanmar Data</span></div></div>
+      <div class="pc rev"><div class="pi">🐎</div><div class="pn">Pure CSS Animation Suite</div><div class="pd">9 scene CSS-only animations: horse race, Golden Pagoda night, dragon, ocean waves, day/night cycle, and more.</div><div class="pt"><span class="ptg">Pure CSS</span><span class="ptg">Myanmar Theme</span></div></div>
+      <div class="pc rev"><div class="pi">📚</div><div class="pn">Myanmar Dev Portal</div><div class="pd">Bilingual programming education portal for Burmese developers. GitHub mobile workflow using Termux.</div><div class="pt"><span class="ptg">Burmese</span><span class="ptg">Education</span><span class="ptg">Termux</span></div></div>
+      <div class="pc rev"><div class="pi">💕</div><div class="pn">Love & Relationship Counter</div><div class="pd">Beautiful bilingual React app counting days together with English/Myanmar toggle and animated dark UI.</div><div class="pt"><span class="ptg">React</span><span class="ptg">Bilingual</span><span class="ptg">Dark UI</span></div></div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <section id="education">
+    <p class="slabel">// 04 · Background</p>
+    <h2 class="stitle rev">Education — ပညာရေး</h2>
+    <div class="eg">
+      <div class="ec rev"><div class="ei">🖥️</div><div><div class="ed">B.Sc Computer Science</div><div class="es">University of Computer Studies, Pathein</div><div class="ey">Computer Science · Pathein, Myanmar</div></div></div>
+      <div class="ec rev"><div class="ei">📖</div><div><div class="ed">B.A English Language</div><div class="es">Pathein Distance University</div><div class="ey">English Studies · Pathein, Myanmar</div></div></div>
+      <div class="ec rev"><div class="ei">🏢</div><div><div class="ed">Senior Android Developer</div><div class="es">5+ Years Professional Experience</div><div class="ey">📍 Tachileik, Shan State, Myanmar 🇲🇲</div></div></div>
+    </div>
+  </section>
+
+  <div class="hr"></div>
+
+  <section id="contact">
+    <p class="slabel">// 05 · Connect</p>
+    <h2 class="stitle rev">Get In Touch</h2>
+    <p class="cq rev"><strong>"မြန်မာ developer တွေအတွက် quality tech education ဖန်တီးနေတဲ့</strong><br/>bilingual content creator တစ်ယောက်ဖြစ်သည်"</p>
+    <div class="cls rev">
+      <a class="cl" href="https://github.com/MoeKyawAung-code" target="_blank">⬡ GitHub Profile</a>
+      <a class="cl" href="https://github.com/MoeKyawAung-code?tab=repositories" target="_blank">◈ All Repositories</a>
+    </div>
+  </section>
+</div>
+
+<footer>&copy; 2025 MOE KYAW AUNG · TACHILEIK, MYANMAR 🇲🇲 · BUILT WITH THREE.JS + PURE LOVE</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// Cursor
+const CD=document.getElementById('cd'),CR=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;CD.style.left=mx+'px';CD.style.top=my+'px';});
+(function tr(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;CR.style.left=rx+'px';CR.style.top=ry+'px';requestAnimationFrame(tr);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{CR.style.width='56px';CR.style.height='56px';CR.style.opacity='.9';});
+  el.addEventListener('mouseleave',()=>{CR.style.width='36px';CR.style.height='36px';CR.style.opacity='.6';});
+});
+
+// 4D Tesseract
+(function(){
+  const canvas=document.getElementById('cvs');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setClearColor(0,0);
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,1,.1,100);
+  camera.position.set(0,0,5);
+
+  // 16 vertices of tesseract
+  const v4=[];
+  for(let i=0;i<16;i++) v4.push([(i&1)?1:-1,(i&2)?1:-1,(i&4)?1:-1,(i&8)?1:-1]);
+  // Edges: vertices differing by 1 bit
+  const edges=[];
+  for(let a=0;a<16;a++) for(let b=a+1;b<16;b++){
+    let d=0; for(let k=0;k<4;k++) if(v4[a][k]!==v4[b][k]) d++;
+    if(d===1) edges.push([a,b]);
+  }
+  const matC=new THREE.LineBasicMaterial({color:0x00FFFF,transparent:true,opacity:.5});
+  const matG=new THREE.LineBasicMaterial({color:0xFFD700,transparent:true,opacity:.3});
+  const lines=edges.map(([a,b],i)=>{
+    const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]);
+    const l=new THREE.Line(g,i<24?matC:matG);
+    scene.add(l);return{l,g,a,b};
+  });
+  const dg=new THREE.SphereGeometry(.045,8,8);
+  const dm=new THREE.MeshBasicMaterial({color:0x00FFFF});
+  const dots=v4.map(()=>{const m=new THREE.Mesh(dg,dm);scene.add(m);return m;});
+
+  // Background particles
+  const pg=new THREE.BufferGeometry();
+  const pp=new Float32Array(600*3);
+  for(let i=0;i<600*3;i++) pp[i]=(Math.random()-.5)*22;
+  pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
+  scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x002244,size:.05,transparent:true,opacity:.5})));
+
+  function resize(){
+    const W=window.innerWidth,H=window.innerHeight;
+    renderer.setSize(W,H);camera.aspect=W/H;camera.updateProjectionMatrix();
+  }
+  resize();window.addEventListener('resize',resize);
+
+  function rot4(v,a,b,c,d,e,f){
+    let[x,y,z,w]=v,cs,sn;
+    cs=Math.cos(a);sn=Math.sin(a);[x,y]=[cs*x-sn*y,sn*x+cs*y];
+    cs=Math.cos(b);sn=Math.sin(b);[z,w]=[cs*z-sn*w,sn*z+cs*w];
+    cs=Math.cos(c);sn=Math.sin(c);[x,z]=[cs*x-sn*z,sn*x+cs*z];
+    cs=Math.cos(d);sn=Math.sin(d);[y,w]=[cs*y-sn*w,sn*y+cs*w];
+    cs=Math.cos(e);sn=Math.sin(e);[x,w]=[cs*x-sn*w,sn*x+cs*w];
+    cs=Math.cos(f);sn=Math.sin(f);[y,z]=[cs*y-sn*z,sn*y+cs*z];
+    return[x,y,z,w];
+  }
+  function proj(v){const sc=2.5/(2.5-v[3]);return new THREE.Vector3(v[0]*sc,v[1]*sc,v[2]*sc);}
+
+  let t=0;
+  function anim(){
+    requestAnimationFrame(anim);t+=.0035;
+    const pr=v4.map(v=>proj(rot4(v,t*.7,t*.5,t*.3,t*.4,t*.6,t*.2)));
+    dots.forEach((d,i)=>d.position.copy(pr[i]));
+    lines.forEach(({g,a,b})=>{
+      const p=g.attributes.position;
+      p.setXYZ(0,pr[a].x,pr[a].y,pr[a].z);
+      p.setXYZ(1,pr[b].x,pr[b].y,pr[b].z);
+      p.needsUpdate=true;
+    });
+    camera.position.x=Math.sin(t*.15)*.8;
+    camera.position.y=Math.cos(t*.12)*.5;
+    camera.lookAt(0,0,0);
+    renderer.render(scene,camera);
+  }
+  anim();
+})();
+
+// Scroll reveal
+const revs=document.querySelectorAll('.rev');
+new IntersectionObserver(entries=>entries.forEach((e,i)=>{
+  if(e.isIntersecting) setTimeout(()=>e.target.classList.add('on'),i*80);
+}),{threshold:.12}).observe?revs.forEach(el=>new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});
+},{threshold:.12}).observe(el)):null;
+</script>
+</body>
+</html>
